@@ -1,5 +1,7 @@
 package ru.skillbranch.devintensive.utils
 
+import ru.skillbranch.devintensive.extensions.replaceAll
+
 object Utils {
     fun parseFullName(fullName: String?): Pair<String?, String?> {
         var str = fullName?.trim()?.replaceAll("  ", " ");
@@ -26,14 +28,6 @@ object Utils {
         if (lastDigit in 2 .. 4)
             return fewForm
         return manyForm
-    }
-
-    private fun String.replaceAll(oldValue: String, newValue: String): String {
-        var result = this
-        while (result.contains(oldValue)) {
-            result = result.replace(oldValue, newValue)
-        }
-        return result
     }
 
     fun toInitials(firstName: String?, lastName: String?): String? {

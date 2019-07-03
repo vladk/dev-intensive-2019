@@ -231,4 +231,18 @@ class ExampleUnitTest {
         assertEquals("222 дня", TimeUnits.DAY.plural(222))
     }
 
+    @Test
+    fun test_truncate() {
+        assertEquals("Bender Bending Ro...", "Bender Bending Rodriguez — дословно «Сгибальщик Сгибающий Родригес»".truncate())
+        assertEquals("Bender Bending R...", "Bender Bending Rodriguez — дословно «Сгибальщик Сгибающий Родригес»".truncate(15))
+        assertEquals("A", "A     ".truncate(3))
+    }
+
+    @Test
+    fun test_stripHtml() {
+        assertEquals("Образовательное IT-сообщество Skill Branch", "<p class=\"title\">Образовательное IT-сообщество Skill Branch</p>".stripHtml())
+        assertEquals("Образовательное IT-сообщество Skill Branch", "<p>Образовательное       IT-сообщество Skill Branch</p>".stripHtml())
+        assertEquals("Lorem ipsum blah Ha-ha-ha",
+            "<div>\nLorem ipsum    blah <span style=\"color: #3333\">Ha-ha-ha</span>\n</div>".stripHtml())
+    }
 }
