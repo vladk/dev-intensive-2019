@@ -1,16 +1,10 @@
 package ru.skillbranch.devintensive.extensions
 
 import ru.skillbranch.devintensive.extensions.TimeUnits.*
+import ru.skillbranch.devintensive.utils.Utils
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.math.absoluteValue
-
-enum class TimeUnits(val size: Long) {
-    SECOND(1000L),
-    MINUTE(60 * SECOND.size),
-    HOUR(60 * MINUTE.size),
-    DAY(24 * HOUR.size)
-}
 
 val Int.sec get() = this * SECOND.size
 val Int.min get() = this * MINUTE.size
@@ -60,6 +54,24 @@ fun Date.humanizeDiff(date: Date = Date()): String {
         }
     }
 }
+enum class TimeUnits(val size: Long) {
+    SECOND(1000L),
+    MINUTE(60 * SECOND.size),
+    HOUR(60 * MINUTE.size),
+    DAY(24 * HOUR.size);
+
+    fun plural(value: Int): String {
+        var form = when (this) {
+            SECOND -> Utils.properForm(value, "секунду", "секунды", "секунд")
+            MINUTE -> Utils.properForm(value, "минуту", "минуты", "минут")
+            HOUR -> Utils.properForm(value, "час", "часа", "часов")
+            DAY -> Utils.properForm(value, "день", "дня", "дней")
+        }
+
+        return "$value $form"
+    }
+}
+
 
 private fun minutesAsPlulars(value: Long) = when (value.asPlurals) {
     Plurals.ONE -> "$value минуту"

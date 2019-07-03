@@ -3,10 +3,7 @@ package ru.skillbranch.devintensive
 import org.junit.Test
 
 import org.junit.Assert.*
-import ru.skillbranch.devintensive.extensions.TimeUnits
-import ru.skillbranch.devintensive.extensions.add
-import ru.skillbranch.devintensive.extensions.format
-import ru.skillbranch.devintensive.extensions.humanizeDiff
+import ru.skillbranch.devintensive.extensions.*
 import ru.skillbranch.devintensive.models.BaseMessage
 import ru.skillbranch.devintensive.models.Chat
 import ru.skillbranch.devintensive.models.User
@@ -225,4 +222,13 @@ class ExampleUnitTest {
         assertEquals(false, user2.isOnline)
 
     }
+
+    @Test
+    fun test_plural() {
+        assertEquals("1 секунду", TimeUnits.SECOND.plural(1))
+        assertEquals("4 минуты", TimeUnits.MINUTE.plural(4))
+        assertEquals("19 часов", TimeUnits.HOUR.plural(19))
+        assertEquals("222 дня", TimeUnits.DAY.plural(222))
+    }
+
 }

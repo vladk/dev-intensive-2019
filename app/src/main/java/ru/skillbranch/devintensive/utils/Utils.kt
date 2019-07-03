@@ -1,7 +1,5 @@
 package ru.skillbranch.devintensive.utils
 
-import java.util.*
-
 object Utils {
     fun parseFullName(fullName: String?): Pair<String?, String?> {
         var str = fullName?.trim()?.replaceAll("  ", " ");
@@ -15,6 +13,19 @@ object Utils {
         val lastName = parts?.getOrNull(1)
 
         return firstName to lastName
+    }
+
+    fun properForm(value: Int, oneForm: String, fewForm: String, manyForm: String ): String
+    {
+        var significantValue = value % 100
+        if (significantValue in 10..20)
+            return manyForm
+        var lastDigit = value % 10
+        if (lastDigit == 1)
+            return oneForm
+        if (lastDigit in 2 .. 4)
+            return fewForm
+        return manyForm
     }
 
     private fun String.replaceAll(oldValue: String, newValue: String): String {
